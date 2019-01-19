@@ -18,12 +18,15 @@ inline void check_sdl_status(int status) {
 }
 
 int main(int argc, char *argv[]) {
+    const int width = 640;
+    const int height = 480;
+
     Window window(SDL_CreateWindow(
         "Hello World",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        640,
-        480,
+        width,
+        height,
         SDL_WINDOW_SHOWN),
         SDL_DestroyWindow);
     check_sdl_resource(window);
@@ -44,6 +47,10 @@ int main(int argc, char *argv[]) {
 
     SDL_Rect r{ 50, 50, 50, 50 };
     check_sdl_status(SDL_RenderFillRect(renderer.get(), &r));
+
+    // Draw line
+    check_sdl_status(SDL_RenderDrawLine(renderer.get(), 0, 0, width - 1, height - 1));
+
     SDL_RenderPresent(renderer.get());
 
     SDL_Delay(1000);
